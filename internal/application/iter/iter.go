@@ -29,9 +29,7 @@ func runMethod(method func() ([]float64, int, error)) error {
 	return nil
 }
 
-func Start() error {
-	mtr, rhs := matrix.GenerateMatrixAndRHS()
-
+func runIters(mtr [][]float64, rhs []float64) error {
 	fmt.Println("Initial matrix A:")
 	matrix.Print2DMatrix(mtr)
 	fmt.Println()
@@ -39,6 +37,12 @@ func Start() error {
 	fmt.Println("Initial right-hand side vector b:")
 	matrix.PrintMatrix(rhs)
 	fmt.Println()
+
+	if ok := matrix.HasDiagonalDominance(mtr); ok {
+		fmt.Println("Matrix has diagonal dominance")
+	} else {
+		fmt.Println("Matrix hasn't diagonal dominance")
+	}
 
 	fmt.Println("--- Method Jacobi")
 	if err := runMethod(func() ([]float64, int, error) {
@@ -72,6 +76,25 @@ func Start() error {
 		return iter.SOR(mtr, rhs, 1.5)
 	}); err != nil {
 		return fmt.Errorf("runMethod(SOR, w=1.5): %w", err)
+	}
+
+	return nil
+}
+
+func Start() error {
+	fmt.Println("Iteration for matrix with diagonal dominance")
+
+	mtr, rhs := matrix.GenerateDiagDominanceMatrixAndRHS()
+	if err := runIters(mtr, rhs); err != nil {
+		return fmt.Errorf("runIters: %w", err)
+	}
+
+	fmt.Print("\n\n-----------------------------------------------\n\n")
+	fmt.Println("Iteration for matrix without diagonal dominance")
+
+	mtr, rhs = matrix.GenerateNonDiagDominanceMatrixAndRHS()
+	if err := runIters(mtr, rhs); err != nil {
+		return fmt.Errorf("runIters: %w", err)
 	}
 
 	return nil

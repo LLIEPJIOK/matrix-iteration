@@ -2,7 +2,6 @@ package iter
 
 import (
 	"fmt"
-	"math"
 
 	"matrix-iter/internal/matrix"
 )
@@ -44,19 +43,13 @@ func Jacobi(mtr [][]float64, rhs []float64) ([]float64, int, error) {
 	// Ax=b -> x = A'x+b'
 	for i := range n {
 		diagEl := mtr[i][i]
-		nonDiagSum := 0.0
 
 		for j := range n {
 			if i != j {
 				mtr[i][j] /= -diagEl
-				nonDiagSum += math.Abs(mtr[i][j])
 			} else {
 				mtr[i][j] = 0
 			}
-		}
-
-		if nonDiagSum >= 1.0 {
-			return nil, 0, NewErrMatrix(fmt.Sprintf("row %d should be with diagonal dominance", i+1))
 		}
 
 		rhs[i] /= diagEl
