@@ -2,7 +2,7 @@
 
 ## Project Description
 
-## This program solves a system of linear equations using iteration methods: Jacobi, GaussSeidel, successive over-relaxation.
+This program solves a system of linear equations using iteration methods: Jacobi, GaussSeidel, successive over-relaxation.
 
 ## Installation
 
