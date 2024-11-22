@@ -5,7 +5,7 @@ import (
 	"log/slog"
 	"os"
 
-	"matrix-iter/internal/application/iter"
+	"github.com/LLIEPJIOK/matrix-iteration/internal/application/iter"
 )
 
 func main() {

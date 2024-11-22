@@ -3,7 +3,7 @@ package iter
 import (
 	"fmt"
 
-	"matrix-iter/internal/matrix"
+	"github.com/LLIEPJIOK/matrix-iteration/internal/matrix"
 )
 
 const (

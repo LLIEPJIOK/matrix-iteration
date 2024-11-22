@@ -4,8 +4,8 @@ import (
 	"errors"
 	"fmt"
 
-	"matrix-iter/internal/iter"
-	"matrix-iter/internal/matrix"
+	"github.com/LLIEPJIOK/matrix-iteration/internal/iter"
+	"github.com/LLIEPJIOK/matrix-iteration/internal/matrix"
 )
 
 func runMethod(method func() ([]float64, int, error)) error {
